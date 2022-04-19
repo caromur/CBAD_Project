@@ -38,7 +38,7 @@ public class ProductService {
 	@RequestMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Retest");
+		System.out.println("Changed to http");
 		return "Hello World";
 	}
 	
