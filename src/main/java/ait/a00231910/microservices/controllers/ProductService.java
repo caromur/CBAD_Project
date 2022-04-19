@@ -38,7 +38,7 @@ public class ProductService {
 	@RequestMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing Checkstyle!");
+		System.out.println("Updated Jenkins IP");
 		return "Hello World";
 	}
 	
