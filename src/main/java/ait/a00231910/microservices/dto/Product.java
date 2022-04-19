@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Product {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -18,12 +18,12 @@ public class Product {
 	private String description;
 	private Double price;
 	private Long sellerId;
-	
+
 	public Product()
 	{
 		
 	}
-	
+
 	public Product(Long id, String name, String description, double price, Long sellerId) {
 		super();
 		this.id = id;
