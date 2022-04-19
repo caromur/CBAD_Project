@@ -38,7 +38,7 @@ public class ProductService {
 	@RequestMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing Automatic Build3!");
+		System.out.println("Testing Automatic Build4!");
 		return "Hello World";
 	}
 	
