@@ -38,7 +38,7 @@ public class ProductService {
 	@RequestMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Changed to http");
+		System.out.println("Testing SonarCloud Automatic Analysis");
 		return "Hello World";
 	}
 	
