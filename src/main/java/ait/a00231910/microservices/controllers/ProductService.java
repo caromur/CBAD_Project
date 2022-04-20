@@ -38,7 +38,7 @@ public class ProductService {
 	@GetMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing SonarCloud Automatic Analysis - Changed RequestMapping to GetMapping");
+		System.out.println("Turned SonarCloud Automatic Analysis off");
 		return "Hello World";
 	}
 	
