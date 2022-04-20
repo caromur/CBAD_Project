@@ -35,10 +35,10 @@ public class ProductService {
 //	@Value("${product-manager.helloProperty}")
 //	private String helloInstance;
 	
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing SonarCloud Automatic Analysis");
+		System.out.println("Testing SonarCloud Automatic Analysis - Changed RequestMapping to GetMapping");
 		return "Hello World";
 	}
 	
