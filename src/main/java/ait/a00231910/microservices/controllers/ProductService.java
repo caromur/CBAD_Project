@@ -53,10 +53,10 @@ public class ProductService {
 		}
 	}
 
-//	@GetMapping("/products")
-//	Iterable<Product> getAllProducts() {
-//		return productRepo.findAll();
-//	}
+	@GetMapping("/products")
+	Iterable<Product> getAllProducts() {
+		return productRepo.findAll();
+	}
 	
 	@GetMapping("/products")
 	List<Product> getAllProductEntities() {
