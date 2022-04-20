@@ -38,7 +38,7 @@ public class ProductService {
 	@GetMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing Jenkins SonarCloud again again");
+		System.out.println("Testing Jenkins SonarCloud");
 		return "Hello World";
 	}
 	
