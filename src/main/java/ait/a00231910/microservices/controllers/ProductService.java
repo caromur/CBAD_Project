@@ -35,7 +35,7 @@ public class ProductService {
 //	@Value("${product-manager.helloProperty}")
 //	private String helloInstance;
 	
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String returnHello()
 	{
 		System.out.println("Testing Jenkins SonarCloud again");
