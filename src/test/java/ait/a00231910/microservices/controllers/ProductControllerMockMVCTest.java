@@ -50,7 +50,7 @@ class ProductControllerMockMVCTest {
 	public void getHelloTest() throws Exception
 	{
 		MvcResult result = this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andReturn();
-		String expected = "Hello World";
+		String expected = "Hello World fail test";
 		assertEquals(expected, result.getResponse().getContentAsString());
 	}
 	
