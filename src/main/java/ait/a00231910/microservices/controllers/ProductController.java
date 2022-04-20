@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ait.a00231910.microservices.dao.ProductRepository;
 import ait.a00231910.microservices.dto.Product;
+import ait.a00231910.microservices.dto.ProductDTO;
 import ait.a00231910.microservices.services.ProductService;
 
 @RestController
@@ -77,9 +78,10 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	ResponseEntity<Product> createProduct(@RequestBody Product product) {
+	ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+		Product product = new Product(productDTO);
 		productRepo.save(product);
-		return ResponseEntity.status(HttpStatus.CREATED).body(product);
+		return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
 	}
 //
 //	@PutMapping("/product/{id}")

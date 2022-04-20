@@ -6,12 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Product {
+public class ProductDTO {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Long id;
 	
 	private String name;
@@ -19,27 +15,18 @@ public class Product {
 	private Double price;
 	private Long sellerId;
 
-	public Product()
+	public ProductDTO()
 	{
 		
 	}
 
-	public Product(Long id, String name, String description, double price, Long sellerId) {
+	public ProductDTO(Long id, String name, String description, double price, Long sellerId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.sellerId = sellerId;
-	}
-	
-	public Product(ProductDTO productDTO)
-	{
-		this.id = productDTO.getId();
-		this.name = productDTO.getName();
-		this.description = productDTO.getDescription();
-		this.price = productDTO.getPrice();
-		this.sellerId = productDTO.getSellerId();
 	}
 
 	public Long getId() {
