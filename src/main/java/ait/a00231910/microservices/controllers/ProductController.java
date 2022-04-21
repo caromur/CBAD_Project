@@ -1,5 +1,6 @@
 package ait.a00231910.microservices.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,22 +54,22 @@ public class ProductController {
 		}
 	}
 
-	@GetMapping("/products")
-	Iterable<Product> getAllProducts() {
-		return productRepo.findAll();
-	}
-	
 //	@GetMapping("/products")
-//	List<Product> getAllProductEntities() {
-//		log.info("product-entities method called");
-//		Iterable<Product> productIter = productRepo.findAll();
-//		List<Product> products = new ArrayList<>();
-//		for(Product product : productIter)
-//		{
-//			products.add(product);
-//		}
-//		return products;
+//	Iterable<Product> getAllProducts() {
+//		return productRepo.findAll();
 //	}
+	
+	@GetMapping("/products")
+	List<Product> getAllProductEntities() {
+		log.info("product-entities method called");
+		Iterable<Product> productIter = productRepo.findAll();
+		List<Product> products = new ArrayList<>();
+		for(Product product : productIter)
+		{
+			products.add(product);
+		}
+		return products;
+	}
 	
 	@GetMapping("/products/{id}")
 	List<Product> getAllProductEntitiesById(@PathVariable("id") Long id) {
