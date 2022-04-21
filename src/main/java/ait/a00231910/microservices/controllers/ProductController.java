@@ -29,8 +29,8 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepo;
 	
-//	@Autowired
-//	ProductService productService;
+	@Autowired
+	ProductService productService;
 	
 //	@Value("${product-manager.helloProperty}")
 //	private String helloInstance;

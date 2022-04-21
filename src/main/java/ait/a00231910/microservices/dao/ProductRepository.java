@@ -11,5 +11,4 @@ import ait.a00231910.microservices.dto.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long>{
 	List<Product> findBySellerId(Long id);
-
 }
