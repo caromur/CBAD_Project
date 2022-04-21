@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("test")
 //@AutoConfigureTestDatabase
-public class ProductControllerITintegrationTest {
+public class ProductControllerIT {
 	
 	@Test
 	public void getProductsIntegrationTest()
