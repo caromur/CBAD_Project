@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +32,8 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepo;
 	
-	@Autowired
-	ProductService productService;
+//	@Autowired
+//	ProductService productService;
 	
 //	@Value("${product-manager.helloProperty}")
 //	private String helloInstance;
@@ -85,38 +87,41 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
 	}
 //
-//	@PutMapping("/product/{id}")
-//	ResponseEntity updateProductById(@PathVariable("id") Long id, @RequestBody Product product) {
-//		product.setId(id);
-//		Optional<Product> savedProduct = productRepo.findById(id);
-//		if (savedProduct.isPresent()) {
-//			if (product.getPrice() == null) {
-//				product.setPrice(savedProduct.get().getPrice());
-//			}
-//			if (product.getName() == null) {
-//				product.setName(savedProduct.get().getName());
-//			}
-//			if (product.getDescription() == null) {
-//				product.setDescription(savedProduct.get().getDescription());
-//			}
-//
-//			productRepo.save(product);
-//			return ResponseEntity.status(HttpStatus.OK).body(product);
-//		} else {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//					.body("Seller with an id of: " + id + " not found");
-//		}
-//	}
-//
-//	@DeleteMapping("/product/{id}")
-//	ResponseEntity<String> deleteProductById(@PathVariable("id") Long id) {
-//		Optional<Product> savedProduct = productRepo.findById(id);
-//		if (savedProduct.isPresent()) {
-//			productRepo.deleteById(id);
-//			return ResponseEntity.status(HttpStatus.OK).body(savedProduct.get().toString() + " has been deleted");
-//		} else {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//					.body("Product with an id of: " + id + " not found");
-//		}
-//	}
+	@PutMapping("/product/{id}")
+	ResponseEntity updateProductById(@PathVariable("id") Long id, @RequestBody Product product) {
+		product.setId(id);
+		Optional<Product> savedProduct = productRepo.findById(id);
+		if (savedProduct.isPresent()) {
+			if (product.getPrice() == null) {
+				product.setPrice(savedProduct.get().getPrice());
+			}
+			if (product.getName() == null) {
+				product.setName(savedProduct.get().getName());
+			}
+			if (product.getDescription() == null) {
+				product.setDescription(savedProduct.get().getDescription());
+			}
+			if (product.getSellerId() == null) {
+				product.setSellerId(savedProduct.get().getSellerId());
+			}
+
+			productRepo.save(product);
+			return ResponseEntity.status(HttpStatus.OK).body(product);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Product with an id of: " + id + " not found");
+		}
+	}
+
+	@DeleteMapping("/product/{id}")
+	ResponseEntity<String> deleteProductById(@PathVariable("id") Long id) {
+		Optional<Product> savedProduct = productRepo.findById(id);
+		if (savedProduct.isPresent()) {
+			productRepo.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).body(savedProduct.get().toString() + " has been deleted");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Product with an id of: " + id + " not found");
+		}
+	}
 }
