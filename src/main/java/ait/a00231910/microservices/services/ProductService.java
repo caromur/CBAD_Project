@@ -3,10 +3,12 @@ package ait.a00231910.microservices.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ait.a00231910.microservices.dao.ProductRepository;
 import ait.a00231910.microservices.dto.Product;
 
+@Service
 public class ProductService {
 	
 	@Autowired ProductRepository productRepo;
@@ -21,4 +23,9 @@ public class ProductService {
 		return false;
 	}
 
+	public String getHello()
+	{
+		return "Hello World";
+	}
+	
 }

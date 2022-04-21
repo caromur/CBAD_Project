@@ -61,6 +61,7 @@ class ProductControllerMockMVCTest {
 	@Test
 	public void getHelloTest() throws Exception
 	{
+		when(productService.getHello()).thenReturn("Hello World");
 		// Generate the result of a Get request on the root URI
 		MvcResult result = this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andReturn();
 		

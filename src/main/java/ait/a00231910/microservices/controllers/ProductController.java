@@ -32,8 +32,8 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepo;
 	
-//	@Autowired
-//	ProductService productService;
+	@Autowired
+	ProductService productService;
 	
 //	@Value("${product-manager.helloProperty}")
 //	private String helloInstance;
@@ -42,7 +42,7 @@ public class ProductController {
 	public String returnHello()
 	{
 		System.out.println("Testing Jenkins SonarCloud again");
-		return "Hello World";
+		return productService.getHello();
 	}
 	
 	@GetMapping("/product/{id}")
