@@ -88,7 +88,8 @@ public class ProductController {
 	}
 //
 	@PutMapping("/product/{id}")
-	ResponseEntity updateProductById(@PathVariable("id") Long id, @RequestBody Product product) {
+	ResponseEntity updateProductById(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO) {
+		Product product = new Product(productDTO);
 		product.setId(id);
 		Optional<Product> savedProduct = productRepo.findById(id);
 		if (savedProduct.isPresent()) {
