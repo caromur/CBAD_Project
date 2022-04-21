@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ait.a00231910.microservices.controllers.ProductControllerMockMVCTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.014 s - in ait.a00231910.microservices.controllers.ProductControllerMockMVCTest
