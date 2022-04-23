@@ -45,6 +45,12 @@ public class ProductController {
 		return productService.getHello();
 	}
 	
+	@GetMapping("/hello2")
+	public String returnHello2()
+	{
+		return "Added Hello Statement";
+	}
+	
 	@GetMapping("/product/{id}")
 	ResponseEntity getProductById(@PathVariable("id") Long id) {
 		Optional<Product> product = productRepo.findById(id);
