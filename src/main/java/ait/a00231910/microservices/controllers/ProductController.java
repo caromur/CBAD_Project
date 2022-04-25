@@ -41,7 +41,7 @@ public class ProductController {
 	@GetMapping("/")
 	public String returnHello()
 	{
-		System.out.println("Testing Full Pipeline3");
+		System.out.println("Testing Full Pipeline4");
 		return productService.getHello();
 	}
 	
