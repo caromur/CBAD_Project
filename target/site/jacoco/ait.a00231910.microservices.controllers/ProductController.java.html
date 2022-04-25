@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Microservices_A00231910</a> &gt; <a href="index.source.html" class="el_package">ait.a00231910.microservices.controllers</a> &gt; <span class="el_source">ProductController.java</span></div><h1>ProductController.java</h1><pre class="source lang-java linenums">package ait.a00231910.microservices.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import ait.a00231910.microservices.dao.ProductRepository;
+import ait.a00231910.microservices.dto.Product;
+import ait.a00231910.microservices.dto.ProductDTO;
+import ait.a00231910.microservices.services.ProductService;
+
+@RestController
+@Service
+<span class="fc" id="L28">public class ProductController {</span>
+	
+<span class="fc" id="L30">	Logger log = LoggerFactory.getLogger(ProductController.class);</span>
+
+	@Autowired
+	ProductRepository productRepo;
+	
+	@Autowired
+	ProductService productService;
+	
+//	@Value(&quot;${product-manager.helloProperty}&quot;)
+//	private String helloInstance;
+	
+	@GetMapping(&quot;/&quot;)
+	public String returnHello()
+	{
+<span class="fc" id="L44">		System.out.println(&quot;Testing Full Pipeline5&quot;);</span>
+<span class="fc" id="L45">		return productService.getHello();</span>
+	}
+	
+//	@GetMapping(&quot;/hello2&quot;)
+//	public String returnHello2()
+//	{
+//		return &quot;Added Hello Statement&quot;;
+//	}
+	
+	@GetMapping(&quot;/product/{id}&quot;)
+	ResponseEntity getProductById(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L56">		Optional&lt;Product&gt; product = productRepo.findById(id);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		if (product.isPresent()) {</span>
+<span class="fc" id="L58">			return ResponseEntity.status(HttpStatus.OK).body(product);</span>
+		} else {
+<span class="fc" id="L60">			return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L61">					.body(&quot;Product with an id of: &quot; + id + &quot; not found&quot;);</span>
+		}
+	}
+
+//	@GetMapping(&quot;/products&quot;)
+//	Iterable&lt;Product&gt; getAllProducts() {
+//		return productRepo.findAll();
+//	}
+	
+	@GetMapping(&quot;/products&quot;)
+	List&lt;Product&gt; getAllProductEntities() {
+<span class="fc" id="L72">		log.info(&quot;product-entities method called&quot;);</span>
+<span class="fc" id="L73">		Iterable&lt;Product&gt; productIter = productRepo.findAll();</span>
+<span class="fc" id="L74">		List&lt;Product&gt; products = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		for(Product product : productIter)</span>
+		{
+<span class="fc" id="L77">			products.add(product);</span>
+		}
+<span class="fc" id="L79">		return products;</span>
+	}
+	
+	@GetMapping(&quot;/products/{id}&quot;)
+	List&lt;Product&gt; getAllProductEntitiesById(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L84">		log.info(&quot;product-entities/{id} method called&quot;);</span>
+<span class="fc" id="L85">		List&lt;Product&gt; products = productRepo.findBySellerId(id);</span>
+<span class="fc" id="L86">		return products;</span>
+	}
+
+	@PostMapping(&quot;/products&quot;)
+	ResponseEntity&lt;ProductDTO&gt; createProduct(@RequestBody ProductDTO productDTO) {
+<span class="fc" id="L91">		Product product = new Product(productDTO);</span>
+<span class="fc" id="L92">		productRepo.save(product);</span>
+<span class="fc" id="L93">		return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);</span>
+	}
+//
+	@PutMapping(&quot;/product/{id}&quot;)
+	ResponseEntity updateProductById(@PathVariable(&quot;id&quot;) Long id, @RequestBody ProductDTO productDTO) {
+<span class="fc" id="L98">		Product product = new Product(productDTO);</span>
+<span class="fc" id="L99">		product.setId(id);</span>
+<span class="fc" id="L100">		Optional&lt;Product&gt; savedProduct = productRepo.findById(id);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">		if (savedProduct.isPresent()) {</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">			if (product.getPrice() == null) {</span>
+<span class="nc" id="L103">				product.setPrice(savedProduct.get().getPrice());</span>
+			}
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">			if (product.getName() == null) {</span>
+<span class="nc" id="L106">				product.setName(savedProduct.get().getName());</span>
+			}
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">			if (product.getDescription() == null) {</span>
+<span class="nc" id="L109">				product.setDescription(savedProduct.get().getDescription());</span>
+			}
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">			if (product.getSellerId() == null) {</span>
+<span class="nc" id="L112">				product.setSellerId(savedProduct.get().getSellerId());</span>
+			}
+
+<span class="fc" id="L115">			productRepo.save(product);</span>
+<span class="fc" id="L116">			return ResponseEntity.status(HttpStatus.OK).body(product);</span>
+		} else {
+<span class="fc" id="L118">			return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L119">					.body(&quot;Product with an id of: &quot; + id + &quot; not found&quot;);</span>
+		}
+	}
+
+	@DeleteMapping(&quot;/product/{id}&quot;)
+	ResponseEntity&lt;String&gt; deleteProductById(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L125">		Optional&lt;Product&gt; savedProduct = productRepo.findById(id);</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">		if (savedProduct.isPresent()) {</span>
+<span class="fc" id="L127">			productRepo.deleteById(id);</span>
+<span class="fc" id="L128">			return ResponseEntity.status(HttpStatus.OK).body(savedProduct.get().toString() + &quot; has been deleted&quot;);</span>
+		} else {
+<span class="fc" id="L130">			return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L131">					.body(&quot;Product with an id of: &quot; + id + &quot; not found&quot;);</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
