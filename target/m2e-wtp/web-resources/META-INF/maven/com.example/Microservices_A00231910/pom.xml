@@ -37,8 +37,8 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<!-- <version>2.1.210</version> -->
-<!-- 			<scope>runtime</scope> -->
-				<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
+			<scope>runtime</scope>
 		</dependency>
 		<!-- Dependency for MySQL -->
 		<dependency>
@@ -157,6 +157,26 @@
 						<goals>
 							<goal>integration-test</goal>
 							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Jacoco Plugin for test reports -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.7.201606060606</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
